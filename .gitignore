@@ -1,0 +1,9 @@
+**/__pycache__/*
+**/.cache/*
+**/.vscode/*
+cpp/build/*
+cpp/docs/doxygen/*
+cpp/docs/sphinx/*
+**/.clangd
+**.zip
+**.log
