@@ -16,8 +16,8 @@ from conftest import get_besee_logs_for_scenario_list
 from metrics import rms_jerk
 
 CACC_SCENARIOS = [
-    # 'open_straight_road',
-    'straight_road_lead_vehicle_ftp'
+    # 'open_straight_road' for default, for OUR case 'straight_road_lead_and_follower_hwfet'
+    'straight_road_lead_and_follower_hwfet' #This should be the scenario you want to run
 ]
 CACC_SCENARIO_DATA = get_besee_logs_for_scenario_list(CACC_SCENARIOS, suppress_output=True, delete_csv=False)
 
@@ -142,4 +142,4 @@ def test_speed_error_requirement(scenario):
             f"Scenario {scenario_name} failed the speed error requirement.\n"
             f"{failure_df.to_string(index=False)}")
     
-    assert False
+    assert False 
