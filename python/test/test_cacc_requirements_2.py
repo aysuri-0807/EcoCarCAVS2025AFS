@@ -19,9 +19,15 @@ CACC_SCENARIOS = [
     'open_straight_road',
     'straight_road_lead_vehicle_ftp'
 ]
-CACC_SCENARIO_DATA = get_besee_logs_for_scenario_list(CACC_SCENARIOS, suppress_output=True, delete_csv=False)
+# CACC_SCENARIO_DATA = get_besee_logs_for_scenario_list(CACC_SCENARIOS, suppress_output=True, delete_csv=False)
 
-@pytest.mark.parametrize('scenario', CACC_SCENARIO_DATA.values())
+# CUSTOM CODE - trying to specify custom csv's to sue
+from besee_utils import load_loggers_csv
+custom_input = {}
+# custom_input["1"] = load_loggers_csv(str(PROJECT_BASE / 'python' / 'test' / 'Custom1.csv'))
+custom_input["2"] = load_loggers_csv(str(PROJECT_BASE / 'python' / 'test' / 'Custom2.csv'))
+
+@pytest.mark.parametrize('scenario', custom_input.values())
 def test_minimum_following_distance_requirement(scenario):
     '''
     requirement under test: at all points in time, the lead vehicle shall not be closer to the 
@@ -66,7 +72,7 @@ def test_minimum_following_distance_requirement(scenario):
             f"Scenario {scenario_name} failed the distance requirement.\n"
             f"{failure_df.to_string(index=False)}")
 
-@pytest.mark.parametrize('scenario', CACC_SCENARIO_DATA.values())
+@pytest.mark.parametrize('scenario', custom_input.values())
 def test_speed_error_requirement(scenario):
     '''
     requirement under test: at steady state, the relative speed error must not exceed 10%
@@ -135,7 +141,7 @@ def test_speed_error_requirement(scenario):
             "time" : failures["time"], 
             "ego_speed": failures["ego_speed"], 
             "ego_target_speed": failures["ego_set_speed"],
-            "speed_error": failures["speed_error"],
+            # "speed_error": failures["speed_error"],
             "relative_speed_error": relative_speed_error[failures.index]
         })
     
