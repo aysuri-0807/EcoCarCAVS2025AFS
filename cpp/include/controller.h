@@ -20,4 +20,7 @@ public:
         double leadYPos,
         double leadYVel
     );
+
+private:
+    double egoYPos;    // estimated longitudinal (Y) position of ego car
 };

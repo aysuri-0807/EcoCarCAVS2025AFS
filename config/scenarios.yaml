@@ -1,6 +1,16 @@
 ---
 # CACC SCENARIOS
 
+#Created Scenario for lead and follower using hwfet 
+straight_road_lead_and_follower_hwfet:
+  lanes: straight_road 
+  actors: 
+    - lead: {make: tesla_model3, lane_id: 0, offset: 50, speed_profile: hwfet}
+  ego: {make: cadillac_lyriq, lane_id: 0}
+  controller: cacc
+
+
+#Default scenarios provided by EcoCar 
 open_straight_road:
   lanes: straight_road
   actors: []
@@ -13,3 +23,4 @@ straight_road_lead_vehicle_ftp:
     - lead: {make: tesla_model3, lane_id: 0, offset: 50, speed_profile: ftp75}
   ego: {make: cadillac_lyriq, lane_id: 0}
   controller: cacc
+  
