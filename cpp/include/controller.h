@@ -22,5 +22,5 @@ public:
     );
 
 private:
-    double egoYPos;    // estimated longitudinal (Y) position of ego car
+    double egoXPos;    // estimated latitudinal (X) position of ego car
 };

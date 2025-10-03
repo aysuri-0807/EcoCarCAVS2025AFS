@@ -53,11 +53,11 @@ def main():
         ['cav_torque_req'],
         ['cav_brake_req'],
         ['ego_acceleration'],
-        #['ACTOR_lead_x'],
+        ['ACTOR_lead_x'],
         #['ACTOR_lead_y'],
         #['ACTOR_lead_heading'],
-        #['ACTOR_ego_x'],
-        #['ACTOR_lead_speed']
+        ['ACTOR_ego_x'],
+        ['ACTOR_lead_speed']
     ]
     
     # process df and plot signals
