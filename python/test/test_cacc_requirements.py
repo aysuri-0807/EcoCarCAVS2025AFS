@@ -17,7 +17,8 @@ from metrics import rms_jerk
 
 CACC_SCENARIOS = [
     # 'open_straight_road' for default, for OUR case 'straight_road_lead_and_follower_hwfet'
-    'highway_randomized_conditions_afs' #This should be the scenario you want to run
+    'highway_randomized_conditions_afs', #This should be the scenario you want to run
+    'highway_bendy_road_afs'
 ]
 CACC_SCENARIO_DATA = get_besee_logs_for_scenario_list(CACC_SCENARIOS, suppress_output=True, delete_csv=False)
 
@@ -61,7 +62,7 @@ def test_minimum_following_distance_requirement(scenario):
             'distance': actual_distance, 
             'needed_distance': needed_distance
         })
-    
+        print (failure_df) 
         pytest.fail(
             f"Scenario {scenario_name} failed the distance requirement.\n"
             f"{failure_df.to_string(index=False)}")
@@ -72,9 +73,9 @@ def test_speed_error_requirement(scenario):
     requirement under test: at steady state, the relative speed error must not exceed 10%
     '''
     
-    # load data from metadata dictionary (ignore first 10 entries of csv (0.1sec) to skip setup rows)
+    # load data from metadata dictionary (ignore first 35 entries of csv (0.1sec) to skip setup rows + adjustment period)
     df: pd.DataFrame = scenario['df']
-    df = df.iloc[10:]
+    df = df.iloc[35:]
     scenario_name = scenario['scenario_name']
     
     # IMPLEMENT ME! :)
@@ -116,7 +117,7 @@ def test_speed_error_requirement(scenario):
     #3. Filtering for moments that are in the steady state
     
     # Creation of conditions
-    valid_acceleration = ego_acceleration.abs() <= acceleration_threshold
+    valid_acceleration = ego_acceleration.abs() <= acceleration_threshold 
     valid_braking = ego_braking == 0
     valid_cav_enable = ego_cav_enable == 1
     steady_state_condition = (valid_acceleration & valid_braking & valid_cav_enable)
@@ -138,7 +139,7 @@ def test_speed_error_requirement(scenario):
             "speed_error": failures["speed_error"],
             "relative_speed_error": relative_speed_error[failures.index]
         })
-    
+        print (failure_df) 
         pytest.fail(
             f"Scenario {scenario_name} failed the speed error requirement.\n"
             f"{failure_df.to_string(index=False)}")

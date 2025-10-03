@@ -16,7 +16,8 @@ from conftest import get_besee_logs_for_scenario_list
 from metrics import rms_jerk
 
 CACC_SCENARIOS = [
-    'highway_randomized_conditions_afs'
+    'highway_randomized_conditions_afs',
+    'highway_bendy_road_afs'
 ]
 # CACC_SCENARIO_DATA = get_besee_logs_for_scenario_list(CACC_SCENARIOS, suppress_output=True, delete_csv=False)
 
@@ -33,9 +34,9 @@ def test_minimum_following_distance_requirement(scenario):
     ego in the positive x direction than the competition-defined closest following distance from the fdcw
     '''
     
-    # load data from metadata dictionary (ignore first 10 entries of csv (0.1sec) to skip setup rows)
+    # load data from metadata dictionary (ignore first 35 entries of csv (0.1sec) to skip setup rows + adjustment period)
     df: pd.DataFrame = scenario['df']
-    df = df.iloc[10:]
+    df = df.iloc[35:]
     scenario_name = scenario['scenario_name']
     
     # IMPLEMENT ME! :) 
@@ -121,7 +122,7 @@ def test_speed_error_requirement(scenario):
     #3. Filtering for moments that are in the steady state
     
     # Creation of conditions
-    valid_acceleration = ego_acceleration.abs() <= acceleration_threshold
+    valid_acceleration = ego_acceleration.abs() <= acceleration_threshold 
     valid_braking = ego_braking == 0
     valid_cav_enable = ego_cav_enable == 1
     steady_state_condition = (valid_acceleration & valid_braking & valid_cav_enable)

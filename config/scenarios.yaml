@@ -7,17 +7,23 @@ open_straight_road:
   ego: {make: cadillac_lyriq, lane_id: 0}
   controller: cacc
 
+
+highway_randomized_conditions_afs: #Scenario to test gap following
+  lanes: straight_road  
+  actors:
+    - lead: {make: tesla_model3, lane_id: 0, offset: 50, speed_profile: highway_randomized_conditions}
+  ego: {make: cadillac_lyriq, lane_id: 0}
+  controller: cacc 
+
+highway_bendy_road_afs: #Scenario to test speed matching 
+  lanes: bendy_road
+  actors : [] 
+  ego: {make: cadillac_lyriq, lane_id: 0}
+  controller: cacc  
+
 straight_road_lead_vehicle_ftp:
   lanes: straight_road
   actors:
     - lead: {make: tesla_model3, lane_id: 0, offset: 50, speed_profile: ftp75}
   ego: {make: cadillac_lyriq, lane_id: 0}
   controller: cacc
-
-
-highway_randomized_conditions_afs:
-  lanes: bendy_road 
-  actors:
-    - lead: {make: tesla_model3, lane_id: 0, offset: 50, speed_profile: highway_randomized_conditions}
-  ego: {make: cadillac_lyriq, lane_id: 0}
-  controller: cacc 

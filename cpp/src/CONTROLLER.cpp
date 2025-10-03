@@ -35,4 +35,5 @@ void CaccController::controllerStep(
     // Default outputs
     torqueCommand_nm = 5000;
     brakeCommand_mps2 = 0;
+    return (torqueCommand_nm,brakeCommand_mps2); 
 }
